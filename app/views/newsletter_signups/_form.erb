@@ -1,0 +1,21 @@
+<%= form_with model: @newsletter_signup, builder: CustomFormBuilder, html: { class: "w-full max-w-md flex flex-col gap-5 items-stretch p-5 bg-slate-100 rounded-md" } do |form| %>
+  <h2 class="font-semibold text-xl">📮 Sign up for our newsletter</h2>
+
+  <div>
+    <%= form.label :email, class: "sr-only" %>
+    <% # this form field is purposefully an optional text input, not a required email input, for the purpose of showing off validation %>
+    <%= form.text_field :email, autocomplete: "off", placeholder: "Enter your email&hellip;".html_safe,
+      class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500"
+    %>
+    <%= form.form_errors_with_placeholder(:email) %>
+  </div>
+
+  <label for="disable_fragments" class="border border-gray-300 rounded p-2 cursor-pointer flex gap-2 bg-white has-focus-visible:border-gray-500 has-checked:border-green-300 has-focus-visible:has-checked:border-green-500 has-checked:bg-green-100">
+    <input type="checkbox" id="disable_fragments" name="disable_fragments" value="true" class="accent-green-600" />
+    <span class="flex flex-col">Disable Fragments? <small class="text-xs text-gray-500 outline-none">(only affects Chrome Canary with flags enabled)</small></span>
+  </label>
+
+  <footer>
+    <button class="w-full bg-slate-600 text-white font-semibold py-2 px-4 rounded hover:bg-slate-700 focus-visible:bg-slate-700 cursor-pointer transition-colors outline-none" type="submit">Sign Up</button>
+  </footer>
+<% end %>

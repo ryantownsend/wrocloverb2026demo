@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Demo">
     <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
+    <?start name="csrf_meta_tags"><%= csrf_meta_tags %><?end name="csrf_meta_tags">
     <%= csp_meta_tag %>
 
     <%= yield :head %>
@@ -20,10 +20,18 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag :intercept_navigations, defer: true %>
+    <%= javascript_include_tag :browser_warning, defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="h-[100dvh] flex flex-col gap-5 items-stretch">
+    <browser-warning hidden class="bg-amber-100 text-amber-900 font-semibold p-5">
+      <p>Your browser does not support the features required for this demo.</p>
+      <p>As of April 2026, you need to use Chrome Canary with the <code>--enable-blink-features=HTMLProcessingInstruction,DocumentPatching,NewHTMLSettingFunctions</code> flags enabled.</p>
+    </browser-warning>
+
+    <main class="flex flex-col items-center justify-center grow p-5">
+      <%= yield %>
+    </main>
   </body>
 </html>
