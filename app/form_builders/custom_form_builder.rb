@@ -20,7 +20,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   # renders the errors for a single field, if any exist
   def form_errors_for(method)
     if object.errors.full_messages_for(method).any?
-      @template.content_tag(:div, class: "text-red-500 text-sm mt-1") do
+      @template.content_tag(:div, class: "bg-red-100 text-red-800 text-sm mt-1 p-2 leading-none rounded") do
         object.errors.full_messages_for(method).to_sentence
       end
     end

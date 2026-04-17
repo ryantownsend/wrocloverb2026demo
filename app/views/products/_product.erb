@@ -1,0 +1,26 @@
+<?start name="product-row-<%= product.id %>">
+<tr id="product-row-<%= product.id %>" style="view-transition-name: product-row-<%= product.id %>">
+  <th class="py-1 pr-2 font-semibold text-left"><%= product.title %></th>
+  <td class="py-1 px-2 text-right font-mono"><%= number_to_currency(product.price_cents / 100.0) %></td>
+  <td class="py-1 px-2 text-right font-mono"><%= product.stock_level %></td>
+  <td class="py-1 pl-2 text-right">
+    <button interestfor="product-<%= product.id %>-published-timestamp"
+      class="inline-block px-2 py-0.5 rounded-full text-sm font-medium <%= product.published? ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>"
+      style="anchor-name: --product-<%= product.id %>-published-pill; interest-delay: 0ms;"
+    ><%= product.published? ? "Yes" : "No" %></button>
+    <% if product.published? %>
+      <span
+        popover="hint" id="product-<%= product.id %>-published-timestamp"
+        class="bg-slate-800 text-white text-sm px-2 py-1 my-0.5 mx-1 rounded-sm shadow-sm whitespace-pre text-left pointer-events-none"
+        style="position-anchor: --product-<%= product.id %>-published-pill; position-area: bottom span-all; position-try-fallbacks: flip-block"
+      ><span class="text-xs text-white/50">Published at:</span><br /><%= product.published_at.strftime("%H:%M on %B %d, %Y") %></span>
+    <% end %>
+  </td>
+  <td class="py-1 pl-2 text-right">
+    <button type="button"
+      command="show-modal" commandfor="product-dialog-<%= product.id %>"
+      class="inline-block px-2 py-0.5 rounded-full text-sm font-medium bg-slate-800 text-white cursor-pointer"
+    >Edit</button>
+  </td>
+</tr>
+<?end name="product-row-<%= product.id %>">

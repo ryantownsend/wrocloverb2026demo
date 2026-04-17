@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "newsletter_signups#new"
   resources :newsletter_signups, only: [ :new, :create ]
+
+  resources :products, only: [ :index, :update ]
 end

@@ -1,0 +1,63 @@
+<?start name="product-dialog-<%= product.id %>">
+<dialog id="product-dialog-<%= product.id %>" closedby="any"
+  style="view-transition-class:dialog"
+  class="
+    open:flex flex-col items-stretch justify-stretch
+    fixed inset-0 left-auto w-[calc(100dvw_-_--spacing(5))] h-[100dvh] max-w-md max-h-none
+    border-l border-black/10 bg-clip-content
+    backdrop:bg-black/30 backdrop:backdrop-blur-xs
+    backdrop:transition-discrete backdrop:transition-all backdrop:opacity-100 open:backdrop:opacity-100 starting:open:backdrop:opacity-0
+    transition-discrete transition-all translate-x-full open:translate-x-0 starting:open:translate-x-full
+  ">
+  <header class="flex items-center justify-between p-5">
+    <h1 class="font-semibold text-xl">Edit Product #<%= product.id %></h1>
+    <button type="button" command="close" commandfor="product-dialog-<%= product.id %>"
+      class="px-2 bg-slate-200 text-slate-800 cursor-pointer leading-none rounded-full"
+    >
+      <span class="sr-only">Close</span>
+      <span aria-hidden="true" class="text-lg" style="text-box: trim-both cap alphabetic;">&times;</span>
+    </button>
+  </header>
+
+  <%= form_for(product, builder: CustomFormBuilder, html: { class: "p-5 grow flex flex-col gap-5" }) do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, required: true, autofocus: true,
+        class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500" %>
+      <%= f.form_errors_with_placeholder(:title) %>
+    </div>
+
+    <div>
+      <%= f.label :stock_level %>
+      <%= f.number_field :stock_level, required: true, step: 1,
+        class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500" %>
+      <%= f.form_errors_with_placeholder(:stock_level) %>
+    </div>
+
+    <div>
+      <%= f.label :price %>
+      <%= f.text_field :price, required: true, pattern: "\\d+(\\.\\d{2})?",
+        class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500" %>
+      <%= f.form_errors_with_placeholder(:price) %>
+    </div>
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description, required: true,
+        class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500" %>
+      <%= f.form_errors_with_placeholder(:description) %>
+    </div>
+
+    <div>
+      <%= f.label :published, class: "w-full border border-gray-300 rounded p-2 bg-white outline-none focus:border-gray-500 has-focus-visible:border-gray-500 has-checked:border-green-300 has-focus-visible:has-checked:border-green-500 has-checked:bg-green-100 cursor-pointer" do |text| %>
+        <%= f.check_box :published, class: "accent-green-600" %>
+        <%= text %>
+      <% end %>
+    </div>
+
+    <footer class="mt-auto">
+      <button type="submit" class="px-5 py-2.5 bg-slate-800 text-white font-semibold rounded-full cursor-pointer">Save Changes</button>
+    </footer>
+  <% end %>
+</dialog>
+<?end name="product-dialog-<%= product.id %>">

@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Demo" %></title>
+    <?start name="page_title"><title>Demo</title><?end name="page_title">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Demo">
     <meta name="mobile-web-app-capable" content="yes">
     <?start name="csrf_meta_tags"><%= csrf_meta_tags %><?end name="csrf_meta_tags">
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
@@ -18,8 +16,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app %>
     <%= javascript_include_tag :intercept_navigations, defer: true %>
     <%= javascript_include_tag :browser_warning, defer: true %>
   </head>
@@ -29,6 +26,15 @@
       <p>Your browser does not support the features required for this demo.</p>
       <p>As of April 2026, you need to use Chrome Canary with the <code>--enable-blink-features=HTMLProcessingInstruction,DocumentPatching,NewHTMLSettingFunctions</code> flags enabled.</p>
     </browser-warning>
+
+    <header class="flex items-center gap-5 p-5 border-b border-gray-300 shadow-md/5">
+      <h1 class="text-2xl font-semibold">Demos</h1>
+
+      <nav class="flex items-center gap-5" data-hard-navigation>
+        <%= link_to "Newsletter Signup", new_newsletter_signup_path %>
+        <%= link_to "Product List", products_path %>
+      </nav>
+    </header>
 
     <main class="flex flex-col items-center justify-center grow p-5">
       <%= yield %>

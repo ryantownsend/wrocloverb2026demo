@@ -1,0 +1,39 @@
+<?start name="product_sort_options">
+<thead>
+  <tr class="border-b border-gray-200 text-sm">
+    <th class="py-1 pr-2 font-semibold text-left">
+      <%= link_to "Title", { action: :index, sort_by: "title_asc" == params[:sort_by] ? "title_desc" : "title_asc" }, class: "text-blue-500 underline underline-offset-2 decoration-blue-300 hover:text-blue-700 transition-colors" %>
+      <% if "title_asc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▲</span>
+      <% elsif "title_desc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▼</span>
+      <% end %>
+    </th>
+    <th class="w-30 py-1 px-2 font-semibold text-right">
+      <% if "price_asc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▲</span>
+      <% elsif "price_desc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▼</span>
+      <% end %>
+      <%= link_to "Price", { action: :index, sort_by: "price_asc" == params[:sort_by] ? "price_desc" : "price_asc" }, class: "text-blue-500 underline underline-offset-2 decoration-blue-300 hover:text-blue-700 transition-colors" %>
+    </th>
+    <th class="w-30 py-1 px-2 font-semibold text-right">
+      <% if "stock_asc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▲</span>
+      <% elsif "stock_desc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▼</span>
+      <% end %>
+      <%= link_to "Stock Level", { action: :index, sort_by: "stock_asc" == params[:sort_by] ? "stock_desc" : "stock_asc" }, class: "text-blue-500 underline underline-offset-2 decoration-blue-300 hover:text-blue-700 transition-colors" %>
+    </th>
+    <th class="w-30 py-1 pl-2 font-semibold text-right">
+      <% if "published_at_asc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▲</span>
+      <% elsif "published_at_desc" == params[:sort_by] %>
+        <span class="text-xs text-blue-300" aria-hidden="true">▼</span>
+      <% end %>
+      <%= link_to "Published?", { action: :index, sort_by: "published_at_asc" == params[:sort_by] ? "published_at_desc" : "published_at_asc" }, class: "text-blue-500 underline underline-offset-2 decoration-blue-300 hover:text-blue-700 transition-colors" %>
+    </th>
+    <th class="w-30 py-1 pl-2 font-semibold text-right text-slate-500">Actions</th>
+  </tr>
+</thead>
+<?end name="product_sort_options">

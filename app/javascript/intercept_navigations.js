@@ -23,22 +23,22 @@ if (document.body.streamAppendHTMLUnsafe) {
 
         // handle redirects
         if (response.status >= 300 && response.status < 400) {
-          console.info("Handling redirect to", response.headers.get("Location"));
           window.location.href = response.headers.get("Location");
           return;
         // handle our fragment response
         } else if (response.headers.get("Content-Type")?.includes("text/html+fragment")) {
-          console.info("Handling fragment response");
-          await response.body
-            .pipeThrough(new TextDecoderStream())
-            .pipeTo(document.body.streamAppendHTMLUnsafe());
+          document.startViewTransition(async () => {
+            await response.body
+              .pipeThrough(new TextDecoderStream())
+              .pipeTo(document.body.streamAppendHTMLUnsafe());
+          });
         // fallback to HTML
         } else {
-          requestAnimationFrame(async () => {
-            console.info("Handling full HTML response");
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+
+          document.startViewTransition(() => {
             document.documentElement.replaceWith(doc.documentElement);
           });
         }
