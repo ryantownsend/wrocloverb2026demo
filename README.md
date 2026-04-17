@@ -1,24 +1,12 @@
-# README
+To make this demo work to it's fullest extent, you'll need Google Chrome Canary, launched with the following command line flags set:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+--enable-blink-features=HTMLProcessingInstruction,DocumentPatching,NewHTMLSettingFunctions
+```
 
-Things you may want to cover:
+The key files are:
 
-* Ruby version
+* `app/javascript/intercept_navigations.js` - our ~600 byte JavaScript file that intercepts navigations.
+* `controllers/concerns/fragment_rendering.rb` - a Rails controller concern that adds support for rendering Declarative Partial Updates.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[The talk slides from Wrocloverb 2026 are available on SpeakerDeck](https://speakerdeck.com/ryantownsend/no-build-utopia-modern-user-experiences-with-rails-and-web-standards)
